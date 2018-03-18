@@ -10,6 +10,7 @@ import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class LoginServiceTest {
 
@@ -40,7 +41,8 @@ public class LoginServiceTest {
              * @return
              */
             public boolean login(String userName, String password) {
-                return false;
+                userDAO.loadByUsernameAndPassword(userName, password);
+                return true;
             }
         };
     }
@@ -74,6 +76,19 @@ public class LoginServiceTest {
      */
     @Test
     public void testLoginFailsIfUserNotKnown() {
-        assertTrue(false);
+        //setup the mock object and loginService
+        final UserDAO userDAO = context.mock(UserDAO.class);
+        loginService.setUserDAO(userDAO);
+
+        //set the expectations
+        context.checking(new Expectations() {{
+            oneOf (userDAO).loadByUsernameAndPassword("nobody", "secret");
+            will(returnValue(null));
+        }});
+
+        //exercise the code
+        //assertFalse(loginService.login("nobody", "secret"));
+        loginService.login("nobody", "secret");
+        context.assertIsSatisfied();
     }
 }

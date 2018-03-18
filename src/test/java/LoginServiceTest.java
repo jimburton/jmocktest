@@ -31,8 +31,10 @@ public class LoginServiceTest {
             }
 
             /**
-             * Change this method so that it makes a SHA1 hash of the password
-             * and returns true if it matches `passwordHash'
+             * Change this method so that it makes a SHA1 hash of the password,
+             * calls userDAO.loadByUsernameAndPassword passing in the userName
+             * and the hash, and finally returns true if the hashed password matches
+             * `passwordHash'
              * @param userName
              * @param password
              * @return
@@ -58,11 +60,12 @@ public class LoginServiceTest {
         //set the expectations
         context.checking(new Expectations() {{
             oneOf (userDAO).loadByUsernameAndPassword(userName, password);
-            will(returnValue(true));
+            will(returnValue(user));
         }});
 
         //exercise the code
         assertTrue(loginService.login(userName, password));
+        context.assertIsSatisfied();
     }
 
     /**

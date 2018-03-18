@@ -6,11 +6,11 @@ public interface UserDAO {
 
     /**
      * Loads a User object for the record that
-     * is returned with the same userName and password.
+     * is returned with the same userName and hash.
      *
      * @parameter userName
-     * @parameter password
+     * @parameter hash
      * @return    User
      */
-    User loadByUsernameAndPassword(String userName, String password);
+    User loadByUsernameAndPassword(String userName, String hash);
 }

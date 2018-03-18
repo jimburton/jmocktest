@@ -33,8 +33,9 @@ public class LoginServiceTest {
             /**
              * Change this method so that it makes a SHA1 hash of the password,
              * calls userDAO.loadByUsernameAndPassword passing in the userName
-             * and the hash, and finally returns true if the hashed password matches
-             * `passwordHash'
+             * and the hash, and finally returns true if the userName matches this.userName
+             * and the hashed password matches this.passwordHash.
+             * 
              * @param userName
              * @param password
              * @return

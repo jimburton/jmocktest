@@ -4,7 +4,7 @@ We are testing part of a *login service* using the
 [jMock](http://jmock.org/) framework. We are using a combination of
 stub and mock classes.
 
-We will be mocking the \texttt{UserDAO} class. A **DAO** (Data
+We will be mocking the `UserDAO` class. A **DAO** (Data
   Access Object) is a class that fetches some data from a store (such
   as a database) and converts into one or more objects in our application.
   
